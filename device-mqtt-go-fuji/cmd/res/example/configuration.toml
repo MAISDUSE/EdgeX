@@ -73,7 +73,7 @@ LogLevel = "DEBUG"
 # Driver configs
 [Driver]
 IncomingSchema = "tcp"
-IncomingHost = "broker.hivemq.com"
+IncomingHost = "0.0.0.0"
 IncomingPort = "1883"
 IncomingUser = "math"
 IncomingPassword = "math"

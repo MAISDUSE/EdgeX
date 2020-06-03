@@ -35,6 +35,20 @@ deviceResources:
 #       { type: "String", size: "0", readWrite: "W" ,scale: "", offset: "", base: ""  }
 #     units:
 #       { type: "String", readWrite: "R", defaultValue: "" }
+- name: cis_var1
+  description: "device cis number 1"
+  properties:
+    value:
+      { type: "Int", size: "4", readWrite: "R", defaultValue: "0", minimum: "0", maximum: "100", floatEncoding: "Base64" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "" }
+- name: cis_var2
+  description: "device cis number 2"
+  properties:
+    value:
+      { type: "Double", size: "4", readWrite: "R", defaultValue: "0.00", minimum: "0.00", maximum: "100.00", floatEncoding: "Base64" }
+    units:
+      { type: "String", readWrite: "R", defaultValue: "" }
 
 deviceCommands:
 - name: testrandfloat32
@@ -52,6 +66,12 @@ deviceCommands:
 #     - { index: "1", operation: "get", deviceResource: "message"}
 #   set:
 #     - { index: "1", operation: "set", deviceResource: "message"}
+- name: testcis_var1
+  get:
+    - { index: "1", operation: "get", deviceResource: "cis_var1"}
+- name: testcis_var2
+  get:
+    - { index: "1", operation: "get", deviceResource: "cis_var2"}
 
 coreCommands:
 - name: testrandfloat32
@@ -109,3 +129,25 @@ coreCommands:
 #     - code: "500"
 #       description: "internal server error"
 #       expectedValues: []
+- name: testcis_var1
+  get:
+    path: "/api/v1/device/{deviceId}/testcis_var1"
+    responses:
+    -
+      code: "200"
+      description: "get the random cis value 1"
+      expectedValues: ["cis_var1"]
+    - code: "500"
+      description: "internal server error"
+      expectedValues: []
+- name: testcis_var2
+  get:
+    path: "/api/v1/device/{deviceId}/testcis_var2"
+    responses:
+    -
+      code: "200"
+      description: "get the random cis value 2"
+      expectedValues: ["cis_var2"]
+    - code: "500"
+      description: "internal server error"
+      expectedValues: []
